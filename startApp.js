@@ -21,18 +21,9 @@ app.use("/dist-wp/", express.static(__dirname + "/dist-wp"));
 app.use("/dist-rollup/", express.static(__dirname + "/dist-rollup"));
 app.use("/node_modules/", express.static(__dirname + "/node_modules"));
 
-app.get("/wp", browseToWebpack);
-function browseToWebpack(request, response) {
-  response.sendFile(path.join(__dirname + "/dist-wp/index.html"));
-}
-app.get("/rollup", browseToRollup);
-function browseToRollup(request, response) {
-  response.sendFile(path.join(__dirname + "/index-rollup.html"));
-}
-app.get("/rollup-system", browseToRollupSystem);
-function browseToRollupSystem(request, response) {
-  response.sendFile(path.join(__dirname + "/index-rollup-system.html"));
-}
+app.get("/wp", (request, response) => response.sendFile(path.join(__dirname + "/dist-wp/index.html")));
+app.get("/rollup", (request, response) => response.sendFile(path.join(__dirname + "/index-rollup.html")));
+app.get("/rollup-system", (request, response) => response.sendFile(path.join(__dirname + "/index-rollup-system.html")));
 
 process.on("uncaughtException", error);
 process.on("unhandledRejection", error);
